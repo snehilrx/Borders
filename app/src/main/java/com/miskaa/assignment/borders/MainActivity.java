@@ -4,11 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
 import android.util.Log;
 
+import com.miskaa.assignment.borders.backend.model.Root;
 import com.miskaa.assignment.borders.frontend.BordersViewModel;
+import com.miskaa.assignment.borders.frontend.ui.fragments.CountryFragment;
+import com.miskaa.assignment.borders.frontend.ui.fragments.MainFragment;
+import com.miskaa.assignment.borders.frontend.ui.fragments.MainFragmentDirections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +44,18 @@ public class MainActivity extends AppCompatActivity {
     /** @return BordersViewModel or null value */
     public BordersViewModel getViewModel(){
         return mViewModel;
+    }
+
+    public void hideToolBar(){
+
+    }
+
+    public void showToolBar(){
+
+    }
+
+    public void gotoDetails(Root root) {
+        Navigation.findNavController(findViewById(R.id.mainAppContainer)).navigate(MainFragmentDirections.actionMainFragmentToDetails(root));
     }
 
     private abstract static class ViewModelMaker<F extends ViewModel> implements ViewModelProvider.Factory {

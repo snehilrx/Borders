@@ -1,6 +1,8 @@
 package com.miskaa.assignment.borders.frontend.ui.fragments;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.miskaa.assignment.borders.R;
 import com.miskaa.assignment.borders.backend.model.Root;
 import com.miskaa.assignment.borders.databinding.FragmentCountryBinding;
@@ -24,16 +27,16 @@ import java.util.List;
 public class MyCountryRecyclerViewAdapter extends RecyclerView.Adapter<MyCountryRecyclerViewAdapter.ViewHolder> {
 
     private final List<Root> mValues;
+    public final OnClickListener mClick;
 
-    public MyCountryRecyclerViewAdapter(List<Root> items) {
+    public MyCountryRecyclerViewAdapter(List<Root> items, OnClickListener click) {
         mValues = items;
+        mClick = click;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        return new ViewHolder(FragmentCountryBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
+        return new ViewHolder(FragmentCountryBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), mClick);
     }
 
     @Override
@@ -43,7 +46,7 @@ public class MyCountryRecyclerViewAdapter extends RecyclerView.Adapter<MyCountry
         holder.mNameView.setText(root.getName());
         String text = String.valueOf(root.getPopulation());
         holder.mPopulationView.setText(text);
-        Glide.with(holder.mPopulationView).load(root.getFlag()).placeholder(android.R.drawable.ic_menu_gallery).dontAnimate().into(holder.mFlag);
+        GlideToVectorYou.init().with(holder.mFlag.getContext()).load(Uri.parse(root.getFlag()), holder.mFlag);
     }
 
     @Override
@@ -108,17 +111,28 @@ public class MyCountryRecyclerViewAdapter extends RecyclerView.Adapter<MyCountry
         public final ImageView mFlag;
         public Root mItem;
 
-        public ViewHolder(FragmentCountryBinding binding) {
+
+        public ViewHolder(FragmentCountryBinding binding, OnClickListener click) {
             super(binding.getRoot());
             mNameView = binding.name;
             mPopulationView = binding.population;
             mFlag = binding.flag;
+            if(click != null){
+                binding.getRoot().setOnClickListener((x) -> {
+                    click.onClick(mItem);
+                });
+            }
         }
+
 
         @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + mPopulationView.getText() + "'";
         }
+    }
+
+    public interface OnClickListener{
+        public void onClick(Root mItem);
     }
 }

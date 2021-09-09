@@ -1,5 +1,8 @@
 package com.miskaa.assignment.borders.backend.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -30,7 +33,7 @@ import javax.annotation.Generated;
         "borders"
 })
 @Generated("jsonschema2pojo")
-public class Root {
+public class Root implements Parcelable {
 
     @JsonProperty("languages")
     private List<Language> languages = null;
@@ -149,4 +152,33 @@ public class Root {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeInt(population);
+        parcel.writeString(capital);
+        parcel.writeString(subregion);
+        parcel.writeString(region);
+        parcel.writeList(borders);
+        parcel.writeTypedList(languages);
+    }
+
+    public Root(){
+
+    }
+
+    public Root(Parcel in){
+        name = in.readString();
+        population = in.readInt();
+        capital = in.readString();
+        subregion = in.readString();
+        region = in.readString();
+        in.readStringList(borders);
+        in.readTypedList(languages, Language.CREATOR);
+    }
 }

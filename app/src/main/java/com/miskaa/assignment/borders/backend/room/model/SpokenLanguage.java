@@ -27,6 +27,7 @@ public class SpokenLanguage {
         this.iso6391 = iso6391;
     }
 
+    @NonNull
     public String getIso6392() {
         return iso6392;
     }

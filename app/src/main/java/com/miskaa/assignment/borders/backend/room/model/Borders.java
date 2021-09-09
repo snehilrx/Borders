@@ -32,6 +32,6 @@ public class Borders {
                 this.country_name = country_name;
         }
 
-        @ColumnInfo(name = "country_name")
+        @ColumnInfo(name = "country_name", index = true)
         private String country_name;
 }
