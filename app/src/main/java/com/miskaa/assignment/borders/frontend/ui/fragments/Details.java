@@ -1,5 +1,7 @@
 package com.miskaa.assignment.borders.frontend.ui.fragments;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
+import com.google.android.material.chip.Chip;
 import com.miskaa.assignment.borders.R;
+import com.miskaa.assignment.borders.backend.model.Language;
+import com.miskaa.assignment.borders.backend.model.Root;
+import com.miskaa.assignment.borders.databinding.FragmentDetailsBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +32,8 @@ public class Details extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FragmentDetailsBinding mBindings;
 
     public Details() {
         // Required empty public constructor
@@ -61,6 +70,21 @@ public class Details extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false);
+        mBindings = FragmentDetailsBinding.inflate(inflater, container, false);
+        Root root = DetailsArgs.fromBundle(getArguments()).getCountry();
+        mBindings.setD(root);
+        Context context = mBindings.getRoot().getContext();
+        for(String borders : root.getBorders()){
+            Chip chip = new Chip(context);
+            chip.setText(borders);
+            mBindings.chipGroup2.addView(chip);
+        }
+        for(Language language : root.getLanguages()){
+            Chip chip = new Chip(context);
+            chip.setText(language.getNativeName());
+            mBindings.chipGroup1.addView(chip);
+        }
+        GlideToVectorYou.init().with(context).load(Uri.parse(root.getFlag()), mBindings.flag);
+        return mBindings.getRoot();
     }
 }
