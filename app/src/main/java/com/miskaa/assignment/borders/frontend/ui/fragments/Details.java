@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.miskaa.assignment.borders.R;
 import com.miskaa.assignment.borders.backend.model.Language;
 import com.miskaa.assignment.borders.backend.model.Root;
@@ -75,16 +77,29 @@ public class Details extends Fragment {
         mBindings.setD(root);
         Context context = mBindings.getRoot().getContext();
         for(String borders : root.getBorders()){
-            Chip chip = new Chip(context);
-            chip.setText(borders);
-            mBindings.chipGroup2.addView(chip);
+            addNewChip(borders, mBindings.chipGroup2);
         }
         for(Language language : root.getLanguages()){
-            Chip chip = new Chip(context);
-            chip.setText(language.getNativeName());
-            mBindings.chipGroup1.addView(chip);
+            addNewChip(language.getNativeName(), mBindings.chipGroup1);
         }
         GlideToVectorYou.init().with(context).load(Uri.parse(root.getFlag()), mBindings.flag);
         return mBindings.getRoot();
+    }
+
+    private void addNewChip(String borders, @NonNull ChipGroup to) {
+        Chip chip = new Chip(to.getContext());
+        chip.setText(borders);
+        chip.setClickable(true);
+        int lr = dp(16);
+        int tb = dp(8);
+        chip.setPadding(lr,tb,lr,tb);
+
+        chip.setId(View.generateViewId());
+        to.addView(chip);
+    }
+
+    private int dp(int sizeInDp){
+        float scale = getResources().getDisplayMetrics().density;
+        return (int) (sizeInDp*scale + 0.5f);
     }
 }

@@ -34,21 +34,21 @@ public class Utils {
 
     @NonNull
     public static List<Borders> toBorders(@NonNull List<Root> roots){
-        HashMap<String, Borders> borders = new HashMap<>();
+        ArrayList<Borders> borders = new ArrayList<>();
         for (Root r: roots){
             for(String s: r.getBorders()){
                 Borders b = new Borders();
                 b.setName(s);
                 b.setCountry_name(r.getName());
-                borders.put(b.getName(), b);
+                borders.add(b);
             }
         }
-        return  new ArrayList<>(borders.values());
+        return  borders;
     }
 
     @NonNull
     public static List<SpokenLanguage> toLanguage(@NonNull List<Root> roots){
-        HashMap<String, SpokenLanguage> sp = new HashMap<>();
+        ArrayList<SpokenLanguage> sp = new ArrayList<>();
         for (Root r: roots){
             for(Language l : r.getLanguages()){
                 SpokenLanguage sl = new SpokenLanguage();
@@ -56,9 +56,10 @@ public class Utils {
                 sl.setIso6392(l.getIso6392());
                 sl.setIso6391(l.getIso6391());
                 sl.setNativeName(l.getNativeName());
-                sp.put(sl.getIso6392(), sl);
+                sl.setCountry_name(r.getName());
+                sp.add(sl);
             }
         }
-        return new ArrayList<>(sp.values());
+        return sp;
     }
 }

@@ -8,6 +8,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.List;
@@ -164,7 +165,7 @@ public class Root implements Parcelable {
         parcel.writeString(capital);
         parcel.writeString(subregion);
         parcel.writeString(region);
-        parcel.writeList(borders);
+        parcel.writeStringList(borders);
         parcel.writeTypedList(languages);
     }
 
@@ -178,7 +179,9 @@ public class Root implements Parcelable {
         capital = in.readString();
         subregion = in.readString();
         region = in.readString();
+        borders = new ArrayList<>();
         in.readStringList(borders);
+        languages = new ArrayList<>();
         in.readTypedList(languages, Language.CREATOR);
     }
 }

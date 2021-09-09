@@ -36,6 +36,7 @@
                     android:layout_width="256dp"
                     android:layout_height="256dp"
                     tools:src="@tools:sample/avatars"
+                    android:scaleType="centerCrop"
                     />
             </com.google.android.material.card.MaterialCardView>
 
@@ -56,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@{d.name}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -75,6 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@{d.capital}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -94,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@{d.region}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -113,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{d.subregion}"
                 android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -126,16 +131,20 @@
                 app:layout_constraintStart_toStartOf="@+id/textView10"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group1"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
+            <HorizontalScrollView
+                android:id="@+id/hs1"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" >
-
-            </com.google.android.material.chip.ChipGroup>
+                app:layout_constraintTop_toBottomOf="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    app:singleLine="true"/>
+            </HorizontalScrollView>
 
             <TextView
                 android:id="@+id/textView12"
@@ -144,18 +153,24 @@
                 android:text="Borders"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                 android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="@+id/chip_group1"
-                app:layout_constraintTop_toBottomOf="@+id/chip_group1" />
+                app:layout_constraintStart_toStartOf="@+id/textView11"
+                app:layout_constraintTop_toBottomOf="@+id/hs1" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group2"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
+            <HorizontalScrollView
                 android:layout_marginTop="8dp"
+                android:paddingBottom="32dp"
+                android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" >
-
-            </com.google.android.material.chip.ChipGroup>
+                app:layout_constraintTop_toBottomOf="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group2"
+                    android:layout_width="wrap_content"
+                    app:singleLine="true"
+                    android:layout_height="48dp">
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

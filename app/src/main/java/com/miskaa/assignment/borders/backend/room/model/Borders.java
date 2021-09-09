@@ -6,12 +6,16 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = {@ForeignKey(entity = RootModel.class,
+@Entity(
+        primaryKeys = {
+                "country_name",
+                "border_name"
+        },
+        foreignKeys = {@ForeignKey(entity = RootModel.class,
         parentColumns = "name",
         childColumns = "country_name",
         onDelete = ForeignKey.CASCADE)})
 public class Borders {
-        @PrimaryKey
         @NonNull
         @ColumnInfo(name = "border_name")
         private String name;
@@ -32,6 +36,7 @@ public class Borders {
                 this.country_name = country_name;
         }
 
+        @NonNull
         @ColumnInfo(name = "country_name", index = true)
         private String country_name;
 }

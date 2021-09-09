@@ -6,11 +6,15 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 
-@Entity
+@Entity(
+        primaryKeys = {
+                "iso639_2",
+                "country_name"
+        }
+)
 public class SpokenLanguage {
     @ColumnInfo(name = "iso639_1")
     private String iso6391;
-    @PrimaryKey
     @NonNull
     @ColumnInfo(name = "iso639_2")
     private String iso6392;
@@ -18,7 +22,19 @@ public class SpokenLanguage {
     private String name;
     @ColumnInfo(name = "nativeName")
     private String nativeName;
-    
+
+    public String getCountry_name() {
+        return country_name;
+    }
+
+    public void setCountry_name(String country_name) {
+        this.country_name = country_name;
+    }
+
+    @NonNull
+    @ColumnInfo(name = "country_name", index = true)
+    private String country_name;
+
     public String getIso6391() {
         return iso6391;
     }

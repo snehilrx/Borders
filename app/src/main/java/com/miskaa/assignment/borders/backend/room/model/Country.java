@@ -11,8 +11,8 @@ public class Country {
     public RootModel root;
 
     @Relation(parentColumn = "name",
-            entityColumn = "iso639_2") public List<SpokenLanguage> languages;
+            entityColumn = "country_name") public List<SpokenLanguage> languages;
 
     @Relation(parentColumn = "name",
-            entityColumn = "border_name") public List<Borders> bordersList;
+            entityColumn = "country_name") public List<Borders> bordersList;
 }
