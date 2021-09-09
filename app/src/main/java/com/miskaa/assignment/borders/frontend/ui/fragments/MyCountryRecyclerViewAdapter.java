@@ -1,5 +1,7 @@
 package com.miskaa.assignment.borders.frontend.ui.fragments;
 
+import static com.miskaa.assignment.borders.Utils.format;
+
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import com.miskaa.assignment.borders.backend.model.Root;
 import com.miskaa.assignment.borders.databinding.FragmentCountryBinding;
 
 import java.util.List;
+
+import static com.miskaa.assignment.borders.Utils.format;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Root}.
@@ -44,7 +48,7 @@ public class MyCountryRecyclerViewAdapter extends RecyclerView.Adapter<MyCountry
         Root root = mValues.get(position);
         holder.mItem = root;
         holder.mNameView.setText(root.getName());
-        String text = String.valueOf(root.getPopulation());
+        String text = format(root.getPopulation());
         holder.mPopulationView.setText(text);
         GlideToVectorYou.init().with(holder.mFlag.getContext()).load(Uri.parse(root.getFlag()), holder.mFlag);
     }
@@ -123,7 +127,6 @@ public class MyCountryRecyclerViewAdapter extends RecyclerView.Adapter<MyCountry
                 });
             }
         }
-
 
         @NonNull
         @Override

@@ -55,7 +55,7 @@ public class Root implements Parcelable {
     private String subregion;
 
     @JsonProperty("population")
-    private Integer population;
+    private Long population;
 
     @JsonProperty("borders")
     private List<String> borders = null;
@@ -123,12 +123,12 @@ public class Root implements Parcelable {
     }
 
     @JsonProperty("population")
-    public Integer getPopulation() {
+    public Long getPopulation() {
         return population;
     }
 
     @JsonProperty("population")
-    public void setPopulation(Integer population) {
+    public void setPopulation(Long population) {
         this.population = population;
     }
 
@@ -161,7 +161,7 @@ public class Root implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(name);
-        parcel.writeInt(population);
+        parcel.writeLong(population);
         parcel.writeString(capital);
         parcel.writeString(subregion);
         parcel.writeString(region);
@@ -175,7 +175,7 @@ public class Root implements Parcelable {
 
     public Root(Parcel in){
         name = in.readString();
-        population = in.readInt();
+        population = in.readLong();
         capital = in.readString();
         subregion = in.readString();
         region = in.readString();

@@ -25,13 +25,14 @@ import android.view.ViewGroup;
 import com.miskaa.assignment.borders.MainActivity;
 import com.miskaa.assignment.borders.R;
 import com.miskaa.assignment.borders.frontend.BordersViewModel;
+import com.miskaa.assignment.borders.frontend.ui.base.BaseFragment;
 
 import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
  */
-public class CountryFragment extends Fragment {
+public class CountryFragment extends BaseFragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -124,7 +125,4 @@ public class CountryFragment extends Fragment {
         return view;
     }
 
-    public MainActivity getAct(){
-        return (MainActivity) getActivity();
-    }
 }

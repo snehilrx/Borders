@@ -9,13 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.miskaa.assignment.borders.R;
+import com.miskaa.assignment.borders.frontend.ui.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends BaseFragment {
 
     public MainFragment() {
         // Required empty public constructor
@@ -38,6 +39,9 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        getAct().hideToolBar();
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
+
+        return v;
     }
 }

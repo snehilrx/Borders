@@ -35,7 +35,7 @@ public class RootModel {
     private String subregion;
 
     @ColumnInfo(name = "population")
-    private Integer population;
+    private Long population;
 
 
     public String getFlag() {
@@ -78,11 +78,11 @@ public class RootModel {
         this.subregion = subregion;
     }
 
-    public Integer getPopulation() {
+    public Long getPopulation() {
         return population;
     }
 
-    public void setPopulation(Integer population) {
+    public void setPopulation(Long population) {
         this.population = population;
     }
 }
