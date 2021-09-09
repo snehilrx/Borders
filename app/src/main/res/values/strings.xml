@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Borders</string>
+    <string name="country_list">Country List</string>
+    <string name="app_subtitle">Countries found in Asia</string>
+    <string name="settings">Settings</string>
+    <string name="favourite">Favourites</string>
+    <string name="history">History</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="not_found">Empty</string>
 </resources>
