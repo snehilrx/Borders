@@ -2,11 +2,13 @@ package com.miskaa.assignment.borders.frontend.ui.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.miskaa.assignment.borders.R;
 import com.miskaa.assignment.borders.frontend.ui.base.BaseFragment;
@@ -41,7 +43,14 @@ public class MainFragment extends BaseFragment {
         // Inflate the layout for this fragment
         getAct().hideToolBar();
         View v = inflater.inflate(R.layout.fragment_main, container, false);
-
+        ((Toolbar)v.findViewById(R.id.menubar)).setOnMenuItemClickListener((item) -> {
+            if (item.getItemId() == R.id.menu_delete) {
+                getAct().getViewModel().deleteData();
+            }else{
+                Toast.makeText(this.getContext(), "Not implemented yet", Toast.LENGTH_LONG).show();
+            }
+            return true;
+        });
         return v;
     }
 }

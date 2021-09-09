@@ -34,6 +34,11 @@ public class BordersRepository {
                 List<Root> roots = response.body();
                 BordersDb database = serviceLocator.getDatabase();
                 BordersDb.databaseWriteExecutor.execute(()->{
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     database.rootDao().insert(roots);
                 });
             }

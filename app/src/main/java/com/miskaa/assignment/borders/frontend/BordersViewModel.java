@@ -34,6 +34,7 @@ public class BordersViewModel extends ViewModel {
         countries = new StateLiveData<List<Root>>() {
             @Override
             public void fallback(StateLiveData<List<Root>> s) {
+                s.postLoading();
                 service.getRepository().fetch(s::postError);
             }
 
@@ -99,4 +100,8 @@ public class BordersViewModel extends ViewModel {
         return _root;
     }
 
+    public void deleteData() {
+        BordersDb database = service.getDatabase();
+        database.getQueryExecutor().execute(database::clearAllTables);
+    }
 }

@@ -49,7 +49,6 @@ public abstract class StateLiveData<T> extends MediatorLiveData<StateData<T>> {
     }
 
     public void attach(LiveData<T> listCountries) {
-        // TODO - remove executor
         this.addSource(listCountries, (x) -> {
             if(isEmpty(x)) fallback(this);
             else{

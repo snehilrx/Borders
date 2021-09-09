@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.miskaa.assignment.borders.backend.model.Root;
@@ -51,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mContainer = findViewById(R.id.mainAppContainer);
         mController = Navigation.findNavController(mContainer);
+
+        setupActionBar();
+    }
+
+    private void setupActionBar() {
         AppBarConfiguration appBarConfiguration =
                 new AppBarConfiguration.Builder(mController.getGraph()).build();
         NavigationUI.setupWithNavController(
