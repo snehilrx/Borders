@@ -82,7 +82,8 @@ public class CountryFragment extends BaseFragment {
                     break;
                 case SUCCESS:
                 case COMPLETE:
-                    if(mProgressDialog != null) mProgressDialog.dismiss();
+                    if(mProgressDialog != null)
+                        mProgressDialog.dismiss();
                     assert state.getData() != null;
                     mAdapter.update(state.getData());
                     break;

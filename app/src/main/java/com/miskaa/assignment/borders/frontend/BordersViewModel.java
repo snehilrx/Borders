@@ -43,11 +43,11 @@ public class BordersViewModel extends ViewModel {
                 return s.isEmpty();
             }
         };
+        loadData();
     }
 
 
     public StateLiveData<List<Root>> getCountries() {
-        loadData();
         return countries;
     }
 
@@ -56,7 +56,12 @@ public class BordersViewModel extends ViewModel {
         database.getQueryExecutor().execute(()->{
             LiveData<List<Country>> listCountries = database.rootDao().getListCountries();
             new Handler(getMainLooper()).post(() -> {
-                countries.attach(Transformations.map(listCountries, this::toRoots));
+                countries.addSource(Transformations.map(listCountries, this::toRoots), (x) -> {
+                    if (x.isEmpty()) countries.fallback(countries);
+                    else {
+                        countries.postSuccess(x);
+                    }
+                });
             });
         });
     }

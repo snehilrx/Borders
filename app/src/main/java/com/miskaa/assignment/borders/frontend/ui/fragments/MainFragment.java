@@ -11,7 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.miskaa.assignment.borders.R;
+import com.miskaa.assignment.borders.base.StateData;
 import com.miskaa.assignment.borders.frontend.ui.base.BaseFragment;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,10 +47,12 @@ public class MainFragment extends BaseFragment {
         getAct().hideToolBar();
         View v = inflater.inflate(R.layout.fragment_main, container, false);
         ((Toolbar)v.findViewById(R.id.menubar)).setOnMenuItemClickListener((item) -> {
-            if (item.getItemId() == R.id.menu_delete) {
-                getAct().getViewModel().deleteData();
-            }else{
-                Toast.makeText(this.getContext(), "Not implemented yet", Toast.LENGTH_LONG).show();
+            if(Objects.requireNonNull(getAct().getViewModel().getCountries().getValue()).getStatus() != StateData.DataStatus.LOADING){
+                if (item.getItemId() == R.id.menu_delete) {
+                    getAct().getViewModel().deleteData();
+                }else{
+                    Toast.makeText(this.getContext(), "Not implemented yet", Toast.LENGTH_LONG).show();
+                }
             }
             return true;
         });
