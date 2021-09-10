@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey;
                 "border_name"
         },
         foreignKeys = {@ForeignKey(entity = RootModel.class,
-        parentColumns = "name",
+        parentColumns = "id",
         childColumns = "country_name",
         onDelete = ForeignKey.CASCADE)})
 public class Borders {

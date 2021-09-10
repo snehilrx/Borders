@@ -22,7 +22,7 @@ public class RootModel {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "id")
     private String name;
 
     @ColumnInfo(name = "capital")

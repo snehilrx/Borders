@@ -4,21 +4,18 @@ import androidx.annotation.NonNull;
 
 import com.miskaa.assignment.borders.backend.model.Language;
 import com.miskaa.assignment.borders.backend.model.Root;
-import com.miskaa.assignment.borders.backend.room.BordersDb;
 import com.miskaa.assignment.borders.backend.room.model.Borders;
-import com.miskaa.assignment.borders.backend.room.model.Country;
 import com.miskaa.assignment.borders.backend.room.model.RootModel;
 import com.miskaa.assignment.borders.backend.room.model.SpokenLanguage;
+import com.miskaa.assignment.borders.backend.room.model.Relations;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
-public class Utils {
+public final class Utils {
     @NonNull
     public static List<RootModel> toRootModels(@NonNull List<Root> roots){
         ArrayList<RootModel> rootList = new ArrayList<>();
@@ -83,7 +80,20 @@ public class Utils {
                 sl.setIso6392(l.getIso6392());
                 sl.setIso6391(l.getIso6391());
                 sl.setNativeName(l.getNativeName());
-                sl.setCountry_name(r.getName());
+                sp.add(sl);
+            }
+        }
+        return sp;
+    }
+
+    @NonNull
+    public static List<Relations> toSpokenLanguageRoot(@NonNull List<Root> roots){
+        ArrayList<Relations> sp = new ArrayList<>();
+        for (Root r: roots){
+            for(Language l : r.getLanguages()){
+                Relations sl = new Relations();
+                sl.setName(r.getName());
+                sl.setIso6392(l.getIso6392());
                 sp.add(sl);
             }
         }
