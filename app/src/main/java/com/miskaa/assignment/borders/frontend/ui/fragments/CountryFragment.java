@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.view.ViewGroup;
 import com.miskaa.assignment.borders.MainActivity;
 import com.miskaa.assignment.borders.R;
 import com.miskaa.assignment.borders.frontend.BordersViewModel;
+import com.miskaa.assignment.borders.frontend.ui.SwipeRefreshMotionLayout;
 import com.miskaa.assignment.borders.frontend.ui.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class CountryFragment extends BaseFragment {
     private MyCountryRecyclerViewAdapter mAdapter = null;
 
     private ProgressDialog mProgressDialog = null;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -66,7 +69,16 @@ public class CountryFragment extends BaseFragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mProgressDialog = null;
+        mAdapter = null;
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

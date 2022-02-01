@@ -51,9 +51,8 @@ public class BordersRepository {
     }
 
     public interface IErrorCallback {
-        public void onError(Throwable t);
+        void onError(Throwable t);
     }
-
 
     public static class Factory {
         public static BordersRepository create(ServiceLocator serviceLocator){

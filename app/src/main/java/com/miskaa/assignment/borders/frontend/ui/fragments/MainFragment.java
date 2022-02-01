@@ -2,8 +2,11 @@ package com.miskaa.assignment.borders.frontend.ui.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import com.miskaa.assignment.borders.R;
 import com.miskaa.assignment.borders.base.StateData;
+import com.miskaa.assignment.borders.frontend.ui.SwipeRefreshMotionLayout;
 import com.miskaa.assignment.borders.frontend.ui.base.BaseFragment;
 
 import java.util.Objects;
@@ -22,6 +26,8 @@ import java.util.Objects;
  * create an instance of this fragment.
  */
 public class MainFragment extends BaseFragment {
+
+    private SwipeRefreshMotionLayout mView;
 
     public MainFragment() {
         // Required empty public constructor
@@ -40,13 +46,26 @@ public class MainFragment extends BaseFragment {
         return new MainFragment();
     }
 
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getAct().getViewModel().setLayoutState(mView.getTransitionState());
+        mView = null;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         getAct().hideToolBar();
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
-        ((Toolbar)v.findViewById(R.id.menubar)).setOnMenuItemClickListener((item) -> {
+        mView = (SwipeRefreshMotionLayout) inflater.inflate(R.layout.fragment_main, container, false);
+
+        Bundle state = getAct().getViewModel().getLayoutState().getValue();
+        if(state != null){
+            mView.setTransitionState(state);
+        }
+        ((Toolbar)mView.findViewById(R.id.menubar)).setOnMenuItemClickListener((item) -> {
             if(Objects.requireNonNull(getAct().getViewModel().getCountries().getValue()).getStatus() != StateData.DataStatus.LOADING){
                 if (item.getItemId() == R.id.menu_delete) {
                     getAct().getViewModel().deleteData();
@@ -56,6 +75,6 @@ public class MainFragment extends BaseFragment {
             }
             return true;
         });
-        return v;
+        return mView;
     }
 }

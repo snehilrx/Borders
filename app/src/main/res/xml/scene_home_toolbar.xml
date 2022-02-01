@@ -86,8 +86,7 @@
     <Transition
         android:id="@+id/shrinkAppBar"
         motion:constraintSetStart="@+id/start"
-        motion:constraintSetEnd="@+id/end"
-        motion:autoTransition="animateToStart" >
+        motion:constraintSetEnd="@+id/end" >
         <KeyFrameSet >
             <KeyAttribute
                 motion:motionTarget="@+id/menubar"

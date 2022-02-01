@@ -23,7 +23,7 @@ public class ServiceLocator {
 
     private ServiceLocator(Context context) {
         api = new Retrofit.Builder()
-                .baseUrl("https://restcountries.eu/")
+                .baseUrl("https://restcountries.com")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build().create(Api.class);
         bordersDb = BordersDb.getInstance(context);

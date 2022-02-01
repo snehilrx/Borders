@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 
 public interface Api {
 
-    @GET("rest/v2/region/asia?fields=name;capital;flag;region;subregion;population;borders;languages")
+    @GET("/v2/all?fields=name,capital,flag,region,subregion,population,borders,languages")
     public Call<List<Root>> getListOfCountriesInAsia();
 
 }

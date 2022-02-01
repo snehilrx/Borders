@@ -46,11 +46,13 @@ public class MyCountryRecyclerViewAdapter extends RecyclerView.Adapter<MyCountry
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Root root = mValues.get(position);
-        holder.mItem = root;
-        holder.mNameView.setText(root.getName());
-        String text = format(root.getPopulation());
-        holder.mPopulationView.setText(text);
-        GlideToVectorYou.init().with(holder.mFlag.getContext()).load(Uri.parse(root.getFlag()), holder.mFlag);
+        if(root != null){
+            holder.mItem = root;
+            holder.mNameView.setText(root.getName());
+            String text = format(root.getPopulation());
+            holder.mPopulationView.setText(text);
+            GlideToVectorYou.init().with(holder.mFlag.getContext()).load(Uri.parse(root.getFlag()), holder.mFlag);
+        }
     }
 
     @Override

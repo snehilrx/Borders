@@ -2,10 +2,12 @@ package com.miskaa.assignment.borders.frontend;
 
 import static android.os.Looper.getMainLooper;
 
+import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
@@ -29,6 +31,8 @@ public class BordersViewModel extends ViewModel {
 
     private final StateLiveData<List<Root>> countries;
 
+    private final MutableLiveData<Bundle> layoutState;
+
     public BordersViewModel(ServiceLocator service){
         this.service = service;
         countries = new StateLiveData<List<Root>>() {
@@ -43,12 +47,21 @@ public class BordersViewModel extends ViewModel {
                 return s.isEmpty();
             }
         };
+        layoutState = new MutableLiveData<>();
         loadData();
     }
 
 
     public StateLiveData<List<Root>> getCountries() {
         return countries;
+    }
+
+    public LiveData<Bundle> getLayoutState() {
+        return layoutState;
+    }
+
+    public void setLayoutState(Bundle state) {
+        layoutState.setValue(state);
     }
 
     private void loadData() {
